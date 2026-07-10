@@ -1,4 +1,4 @@
-## Quick draft with claude, part-tested
+## Tested for Denso unit
 
 # Carrera Control Unit Guide
 

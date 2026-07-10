@@ -283,11 +283,11 @@
       <tr><td><span class="key">SPEED</span></td><td>Sets a car's top speed, 10 levels</td></tr>
       <tr><td><span class="key">BRAKE</span></td><td>Sets a car's braking effect, 10 levels</td></tr>
       <tr><td><span class="key">FUEL</span></td><td>Sets fuel tank capacity, 10 levels (Pit Stop function only)</td></tr>
-      <tr><td><span class="key">CODE</span></td><td>Assigns a car to a speed controller; ×3 assigns the Pace Car</td></tr>
+      <tr><td><span class="key">CODE</span></td><td>Programs cars: press ×1 for a driver, ×2 for the autonomous car, ×3 for the Pace Car</td></tr>
       <tr><td><span class="key">ESC / PACE CAR</span></td><td>Cancels programming · releases the Pace Car during a race</td></tr>
       <tr><td><span class="key">ENTER / START</span></td><td>Confirms a setting · starts the race sequence</td></tr>
-      <tr><td>Slide switch OFF / ON / RES</td><td>Track power; RES position used when waking or resetting the unit</td></tr>
-      <tr><td>Slide switch OFF / ON</td><td>Fuelling function (needs Pit Stop lane 30356 + Driver Display 30353)</td></tr>
+      <tr><td>Slide switch OFF / ON / REAL</td><td>Fuelling function. OFF = no fuel use · ON = cars consume fuel · REAL = top speed also depends on tank level (full tank = heavier, slower; needs Pit Lane 30356)</td></tr>
+      <tr><td>Slide switch OFF / ON</td><td>Track power</td></tr>
     </table>
   </section>
 
@@ -364,31 +364,36 @@
     <div class="sec-head"><span class="sec-num">7</span><h2>Pace Car</h2></div>
     <p class="lead">One car can be registered as the Pace Car. It leads the field at a fixed speed, changes lanes on its own, then pulls into the pits. Requires a Pit Stop lane.</p>
     <ol class="steps">
-      <li>Place <strong>only</strong> the intended Pace Car on the track.</li>
-      <li>Press <span class="key">CODE</span> <strong>three times</strong> (single press = normal driver coding).</li>
-      <li>Press the lane-change button on a controller when prompted; wait for the centre LED, then hold the throttle until the car reaches the desired cruising speed and press the lane-change button again. The car enters the Pit Stop lane and programming is complete.</li>
-      <li>During a race, press <span class="key">ESC / PACE CAR</span> to release it. It circulates at its stored speed until you press the button again and it returns to the pits.</li>
+      <li>Switch the Control Unit on and place <strong>only</strong> the intended Pace Car on the track.</li>
+      <li>Press <span class="key">CODE</span> <strong>three times</strong>. The first three LEDs light up.</li>
+      <li>Press the <strong>lane-change button</strong> on a speed controller once. LEDs 2 to 5 light in sequence; wait until the centre LED lights again.</li>
+      <li>Squeeze the throttle until the car reaches the desired cruising speed, then press the lane-change button once more. Encoding is complete and the car enters the Pit Stop lane on its own during the next laps.</li>
+      <li>During a race, press <span class="key">ESC / PACE CAR</span> once to release it: LEDs 2 and 3 light and the car leaves the pits. Press the button again and it re-enters the Pit Lane within the current lap.</li>
     </ol>
-    <div class="note"><b>Note</b>On a Position Tower or Driver Display the Pace Car is shown as address 8, the autonomous car as address 7.</div>
+    <div class="note"><b>Note</b>On a Position Tower the Pace Car is shown as address 8, the autonomous car as address 7. To enable this display: switch the unit off, hold <span class="key">BRAKE</span>, switch it on, release; press <span class="key">BRAKE</span> to toggle (1 LED = off, 2 LEDs = on) and confirm with <span class="key">ENTER / START</span>.</div>
   </section>
 
   <section id="ghost">
     <div class="sec-head"><span class="sec-num">8</span><h2>Autonomous (ghost) car</h2></div>
     <p class="lead">A self-driving opponent at a constant speed.</p>
     <ol class="steps">
-      <li>Place <strong>only</strong> the car to be programmed on the track.</li>
-      <li>Run the coding gesture from a controller: press the lane-change button twice, lift the car at the front, put it back down.</li>
-      <li>While the car's lights flash, press the lane-change button <strong>4 more times</strong> to select autonomous mode.</li>
-      <li>Start the car with the throttle; press the lane-change button once it is at the desired speed. It now drives and changes lanes on its own.</li>
-      <li>To decode: hold the car still, then run the normal coding sequence from sec. 3, which overwrites the autonomous programming.</li>
+      <li>Switch the Control Unit on and place <strong>only</strong> the car to be programmed on the track.</li>
+      <li>Press <span class="key">CODE</span> <strong>twice</strong>. The first two LEDs on the Control Unit light up.</li>
+      <li>Press the <strong>lane-change button</strong> on a speed controller once. LEDs 3 to 5 light in sequence; wait until the centre LED lights again.</li>
+      <li>Squeeze that controller's throttle until the car reaches the desired speed, then press the lane-change button once more. Encoding is complete; the car now drives on its own at that speed.</li>
+      <li>To decode: run the normal coding sequence from sec. 3, which overwrites the autonomous programming. The setting is otherwise kept permanently.</li>
     </ol>
+    <figure class="led-fig">
+      <div class="leds"><span class="led on"></span><span class="led on"></span><span class="led"></span><span class="led"></span><span class="led"></span></div>
+      <figcaption><span class="fig">Fig. 8.1</span>  LEDs 1 + 2 after pressing CODE twice</figcaption>
+    </figure>
   </section>
 
   <section id="reset">
     <div class="sec-head"><span class="sec-num">9</span><h2>Factory reset · energy saving</h2></div>
     <ol class="steps">
       <li><strong>Reset:</strong> switch the unit off. Hold <span class="key">ESC / PACE CAR</span>, switch the unit back on, release the button. Speed, brake, fuel, sound and lap counting return to factory values. Cars keep their own stored settings unless recoded.</li>
-      <li><strong>Energy saving:</strong> after ~20 minutes idle, tower/displays/start light switch off. Turn the unit off for 2–3 seconds and back on; all settings are kept.</li>
+      <li><strong>Energy saving:</strong> after ~20 minutes idle, tower/displays/start light switch off. To wake it, briefly squeeze any controller's throttle, press a lane-change button, or press any key on the Control Unit; all settings are kept.</li>
     </ol>
     <table>
       <caption>Tab. 9.1  Factory values after reset</caption>
@@ -397,6 +402,7 @@
       <tr><td>Braking effect</td><td>10</td></tr>
       <tr><td>Fuel tank capacity</td><td>7</td></tr>
       <tr><td>Sound</td><td>on</td></tr>
+      <tr><td>Position display for autonomous / Pace Car</td><td>off</td></tr>
     </table>
   </section>
 

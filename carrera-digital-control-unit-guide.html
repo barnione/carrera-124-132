@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control Unit 30352: Operating &amp; Programming Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,700&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f6f1;
+    --ink:#191919;
+    --red:#e2231a;
+    --rule:#cfccc4;
+    --gray:#6e6b63;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Archivo',Helvetica,Arial,sans-serif;
+    font-size:15px;
+    line-height:1.6;
+  }
+  a{color:var(--ink);}
+  a:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+
+  .sheet{max-width:740px;margin:0 auto;padding:0 22px 72px;}
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    border-bottom:3px solid var(--ink);
+    padding:34px 0 18px;
+    margin-bottom:6px;
+  }
+  .brandline{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .brandmark{
+    background:var(--red);
+    color:#fff;
+    font-family:'Barlow Condensed',sans-serif;
+    font-style:italic;
+    font-weight:700;
+    font-size:20px;
+    letter-spacing:.02em;
+    padding:2px 12px 3px 10px;
+    text-transform:uppercase;
+  }
+  .itemno{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--gray);
+  }
+  .masthead h1{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    font-size:clamp(34px,6vw,52px);
+    line-height:1.02;
+    letter-spacing:.01em;
+    margin:18px 0 6px;
+  }
+  .masthead .subtitle{
+    margin:0;
+    font-size:14px;
+    color:var(--gray);
+  }
+  .masthead .subtitle em{font-style:normal;color:var(--ink);}
+  .finishline{
+    height:10px;
+    margin-top:20px;
+    background:
+      repeating-conic-gradient(var(--ink) 0% 25%, var(--paper) 0% 50%)
+      0 0 / 20px 20px;
+    border:1px solid var(--ink);
+  }
+
+  /* ---------- table of contents ---------- */
+  .toc{padding:20px 0 26px;border-bottom:1px solid var(--rule);}
+  .toc h2{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:13px;
+    margin:0 0 12px;
+    color:var(--gray);
+  }
+  .toc ol{margin:0;padding:0;list-style:none;}
+  .toc li{display:flex;align-items:baseline;gap:8px;padding:3px 0;}
+  .toc li a{text-decoration:none;}
+  .toc li a:hover{color:var(--red);}
+  .toc .n{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--red);
+    min-width:26px;
+  }
+  .toc .leader{
+    flex:1;
+    border-bottom:1px dotted var(--rule);
+    transform:translateY(-4px);
+  }
+  .toc .pg{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--gray);
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:30px 0 8px;border-bottom:1px solid var(--rule);}
+  section:last-of-type{border-bottom:none;}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:4px;}
+  .sec-num{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    color:#fff;
+    background:var(--red);
+    padding:1px 8px;
+    flex-shrink:0;
+  }
+  .sec-head h2{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    font-size:24px;
+    margin:0;
+  }
+  .lead{margin:2px 0 16px;color:var(--gray);font-size:14px;max-width:60ch;}
+
+  /* buttons rendered as printed keys */
+  .key{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.82em;
+    border:1px solid var(--ink);
+    padding:0 5px 1px;
+    white-space:nowrap;
+    background:#fff;
+  }
+
+  ol.steps{margin:0 0 14px;padding-left:26px;}
+  ol.steps li{margin-bottom:9px;padding-left:6px;}
+  ol.steps li::marker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--red);
+  }
+
+  table{width:100%;border-collapse:collapse;margin:6px 0 16px;font-size:14px;}
+  caption{
+    text-align:left;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--gray);
+    padding-bottom:6px;
+  }
+  th{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:12px;
+    text-align:left;
+    border-bottom:2px solid var(--ink);
+    padding:5px 8px 5px 0;
+  }
+  td{border-bottom:1px solid var(--rule);padding:7px 8px 7px 0;vertical-align:top;}
+
+  /* notes and warnings, manual style */
+  .note,.warning{
+    margin:10px 0 18px;
+    padding:10px 14px;
+    border:1px solid var(--ink);
+    font-size:13.5px;
+    max-width:62ch;
+  }
+  .note b,.warning b{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    font-size:12px;
+    margin-right:8px;
+  }
+  .warning{border-left:5px solid var(--red);}
+  .warning b{color:var(--red);}
+
+  /* ---------- LED figures (signature element) ---------- */
+  figure.led-fig{
+    margin:6px 0 20px;
+    padding:14px 16px 10px;
+    background:#fff;
+    border:1px solid var(--ink);
+    display:inline-block;
+  }
+  .leds{display:flex;gap:10px;margin-bottom:10px;}
+  .led{
+    width:15px;height:15px;border-radius:50%;
+    background:#e9e6df;
+    border:1px solid #b9b5aa;
+  }
+  .led.on{background:var(--red);border-color:var(--red);}
+  .led.blink{
+    background:var(--red);border-color:var(--red);
+    animation:blink 1s steps(2,end) infinite;
+  }
+  @keyframes blink{50%{background:#e9e6df;border-color:#b9b5aa;}}
+  @media (prefers-reduced-motion:reduce){
+    .led.blink{animation:none;outline:2px dashed var(--red);outline-offset:2px;}
+    html{scroll-behavior:auto;}
+  }
+  figure.led-fig figcaption{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--gray);
+  }
+  figure.led-fig figcaption .fig{color:var(--red);}
+
+  footer{
+    margin-top:40px;
+    padding-top:14px;
+    border-top:3px solid var(--ink);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--gray);
+    line-height:1.7;
+  }
+
+  @media (max-width:520px){
+    .toc ol{font-size:14px;}
+    ol.steps{padding-left:22px;}
+  }
+  @media print{
+    body{background:#fff;}
+    .finishline{print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="brandline">
+      <span class="brandmark">Digital 124 / 132</span>
+      <span class="itemno">Item no. 30352 · Rev. 07/2026</span>
+    </div>
+    <h1>Control Unit<br>Operating &amp; Programming Sheet</h1>
+    <p class="subtitle"><em>Assembly and operating instructions</em> · Montage- und Betriebsanleitung</p>
+    <div class="finishline" role="presentation"></div>
+  </header>
+
+  <nav class="toc" aria-label="Contents">
+    <h2>Contents · Inhalt</h2>
+    <ol>
+      <li><span class="n">1</span><a href="#panel">Controls and switches</a><span class="leader"></span><span class="pg">01</span></li>
+      <li><span class="n">2</span><a href="#power">First power-up</a><span class="leader"></span><span class="pg">01</span></li>
+      <li><span class="n">3</span><a href="#coding">Coding a car to a speed controller</a><span class="leader"></span><span class="pg">02</span></li>
+      <li><span class="n">4</span><a href="#speed">Setting basic speed</a><span class="leader"></span><span class="pg">02</span></li>
+      <li><span class="n">5</span><a href="#brake">Setting braking effect</a><span class="leader"></span><span class="pg">03</span></li>
+      <li><span class="n">6</span><a href="#fuel">Setting fuel tank capacity</a><span class="leader"></span><span class="pg">03</span></li>
+      <li><span class="n">7</span><a href="#pace">Pace Car</a><span class="leader"></span><span class="pg">04</span></li>
+      <li><span class="n">8</span><a href="#ghost">Autonomous (ghost) car</a><span class="leader"></span><span class="pg">04</span></li>
+      <li><span class="n">9</span><a href="#reset">Factory reset · energy saving</a><span class="leader"></span><span class="pg">05</span></li>
+      <li><span class="n">10</span><a href="#trouble">Troubleshooting</a><span class="leader"></span><span class="pg">05</span></li>
+    </ol>
+  </nav>
+
+  <section id="panel">
+    <div class="sec-head"><span class="sec-num">1</span><h2>Controls and switches</h2></div>
+    <p class="lead">Some buttons carry two functions. Any programming step can be cancelled with <span class="key">ESC / PACE CAR</span>; settings are confirmed with <span class="key">ENTER / START</span>.</p>
+    <table>
+      <caption>Tab. 1.1  Front panel assignment</caption>
+      <tr><th>Control</th><th>Function</th></tr>
+      <tr><td><span class="key">SPEED</span></td><td>Sets a car's top speed, 10 levels</td></tr>
+      <tr><td><span class="key">BRAKE</span></td><td>Sets a car's braking effect, 10 levels</td></tr>
+      <tr><td><span class="key">FUEL</span></td><td>Sets fuel tank capacity, 10 levels (Pit Stop function only)</td></tr>
+      <tr><td><span class="key">CODE</span></td><td>Assigns a car to a speed controller; ×3 assigns the Pace Car</td></tr>
+      <tr><td><span class="key">ESC / PACE CAR</span></td><td>Cancels programming · releases the Pace Car during a race</td></tr>
+      <tr><td><span class="key">ENTER / START</span></td><td>Confirms a setting · starts the race sequence</td></tr>
+      <tr><td>Slide switch OFF / ON / RES</td><td>Track power; RES position used when waking or resetting the unit</td></tr>
+      <tr><td>Slide switch OFF / ON</td><td>Fuelling function (needs Pit Stop lane 30356 + Driver Display 30353)</td></tr>
+    </table>
+  </section>
+
+  <section id="power">
+    <div class="sec-head"><span class="sec-num">2</span><h2>First power-up</h2></div>
+    <ol class="steps">
+      <li>Connect the track's connecting rail and the transformer to the Control Unit.</li>
+      <li>Plug wired speed controllers into the numbered connectors. A WIRELESS+ receiver must go into <strong>connector 1</strong>; extra wired controllers in connectors 3 and 4 take addresses 5 and 6.</li>
+      <li>Slide the power switch to ON. After about one second the centre LED lights permanently and a short beep sounds. The unit is ready.</li>
+    </ol>
+    <figure class="led-fig">
+      <div class="leds"><span class="led"></span><span class="led"></span><span class="led on"></span><span class="led"></span><span class="led"></span></div>
+      <figcaption><span class="fig">Fig. 2.1</span>  Centre LED solid: unit ready</figcaption>
+    </figure>
+  </section>
+
+  <section id="coding">
+    <div class="sec-head"><span class="sec-num">3</span><h2>Coding a car to a speed controller</h2></div>
+    <p class="lead">Required before a car's first race, and whenever you want a different controller to drive it. Settings stay saved in the car until it is recoded.</p>
+    <ol class="steps">
+      <li>Switch the Control Unit on and place the car on the track.</li>
+      <li>Press <span class="key">CODE</span> once. The first LED lights up.</li>
+      <li>Press the <strong>lane-change button</strong> once on the controller that should drive this car.</li>
+      <li>The car's lights (if fitted) flash while LEDs 2–4 light in sequence.</li>
+      <li>When the centre LED lights permanently and a tone sounds, coding is complete.</li>
+      <li>Repeat for each car/controller pair, one car at a time.</li>
+    </ol>
+    <figure class="led-fig">
+      <div class="leds"><span class="led"></span><span class="led blink"></span><span class="led blink"></span><span class="led blink"></span><span class="led"></span></div>
+      <figcaption><span class="fig">Fig. 3.1</span>  LEDs 2 to 4 run while the code is written</figcaption>
+    </figure>
+    <div class="warning"><b>Warning</b>Keep only the car being coded on the rails. With two uncoded cars on the track the unit cannot tell them apart.</div>
+  </section>
+
+  <section id="speed">
+    <div class="sec-head"><span class="sec-num">4</span><h2>Setting basic speed</h2></div>
+    <p class="lead">Per car, 10 levels. The 5 LEDs show the level: a flashing LED counts as a half step, a solid LED as a full step. Useful for evening out the field.</p>
+    <ol class="steps">
+      <li>With the unit on, place the car(s) to adjust on the track (already coded per sec. 3).</li>
+      <li>Press <span class="key">SPEED</span> once; the LEDs show the stored level.</li>
+      <li>Press <span class="key">SPEED</span> repeatedly to step from level 1 (slowest) to 10 (fastest).</li>
+      <li>Confirm with <span class="key">ENTER / START</span>. A short running light plus the centre LED confirms the save.</li>
+    </ol>
+    <figure class="led-fig">
+      <div class="leds"><span class="led on"></span><span class="led on"></span><span class="led blink"></span><span class="led"></span><span class="led"></span></div>
+      <figcaption><span class="fig">Fig. 4.1</span>  2 solid + 1 flashing = level 5 of 10</figcaption>
+    </figure>
+  </section>
+
+  <section id="brake">
+    <div class="sec-head"><span class="sec-num">5</span><h2>Setting braking effect</h2></div>
+    <ol class="steps">
+      <li>With the unit on, place the car(s) to adjust on the track.</li>
+      <li>Press <span class="key">BRAKE</span> once; the LEDs show the stored level.</li>
+      <li>Press <span class="key">BRAKE</span> repeatedly: level 1 = long coasting, level 10 = strong braking.</li>
+      <li>Confirm with <span class="key">ENTER / START</span>.</li>
+    </ol>
+    <div class="note"><b>Note</b>Speed, brake and fuel are stored <em>in the car</em>, not in the track, so the car keeps its settings on any Digital 124/132 circuit.</div>
+  </section>
+
+  <section id="fuel">
+    <div class="sec-head"><span class="sec-num">6</span><h2>Setting fuel tank capacity</h2></div>
+    <p class="lead">Applies to all cars simultaneously. Only relevant with the Pit Stop lane; without it, leave the fuel switch off.</p>
+    <ol class="steps">
+      <li>Slide the fuel switch to ON to activate the fuelling function.</li>
+      <li>Place the car(s) on the track and press <span class="key">FUEL</span> once; the LEDs show the last-used capacity.</li>
+      <li>Press <span class="key">FUEL</span> repeatedly: level 1 = smallest tank, level 10 = full tank.</li>
+      <li>Confirm with <span class="key">ENTER / START</span>.</li>
+    </ol>
+    <div class="note"><b>Refuelling</b>A low tank makes the car's lights flash and the car slow down or stutter. Enter the Pit Stop and release the throttle: waiting until the lights stop flashing fills the tank; leaving earlier fills it partially.</div>
+  </section>
+
+  <section id="pace">
+    <div class="sec-head"><span class="sec-num">7</span><h2>Pace Car</h2></div>
+    <p class="lead">One car can be registered as the Pace Car. It leads the field at a fixed speed, changes lanes on its own, then pulls into the pits. Requires a Pit Stop lane.</p>
+    <ol class="steps">
+      <li>Place <strong>only</strong> the intended Pace Car on the track.</li>
+      <li>Press <span class="key">CODE</span> <strong>three times</strong> (single press = normal driver coding).</li>
+      <li>Press the lane-change button on a controller when prompted; wait for the centre LED, then hold the throttle until the car reaches the desired cruising speed and press the lane-change button again. The car enters the Pit Stop lane and programming is complete.</li>
+      <li>During a race, press <span class="key">ESC / PACE CAR</span> to release it. It circulates at its stored speed until you press the button again and it returns to the pits.</li>
+    </ol>
+    <div class="note"><b>Note</b>On a Position Tower or Driver Display the Pace Car is shown as address 8, the autonomous car as address 7.</div>
+  </section>
+
+  <section id="ghost">
+    <div class="sec-head"><span class="sec-num">8</span><h2>Autonomous (ghost) car</h2></div>
+    <p class="lead">A self-driving opponent at a constant speed.</p>
+    <ol class="steps">
+      <li>Place <strong>only</strong> the car to be programmed on the track.</li>
+      <li>Run the coding gesture from a controller: press the lane-change button twice, lift the car at the front, put it back down.</li>
+      <li>While the car's lights flash, press the lane-change button <strong>4 more times</strong> to select autonomous mode.</li>
+      <li>Start the car with the throttle; press the lane-change button once it is at the desired speed. It now drives and changes lanes on its own.</li>
+      <li>To decode: hold the car still, then run the normal coding sequence from sec. 3, which overwrites the autonomous programming.</li>
+    </ol>
+  </section>
+
+  <section id="reset">
+    <div class="sec-head"><span class="sec-num">9</span><h2>Factory reset · energy saving</h2></div>
+    <ol class="steps">
+      <li><strong>Reset:</strong> switch the unit off. Hold <span class="key">ESC / PACE CAR</span>, switch the unit back on, release the button. Speed, brake, fuel, sound and lap counting return to factory values. Cars keep their own stored settings unless recoded.</li>
+      <li><strong>Energy saving:</strong> after ~20 minutes idle, tower/displays/start light switch off. Turn the unit off for 2–3 seconds and back on; all settings are kept.</li>
+    </ol>
+    <table>
+      <caption>Tab. 9.1  Factory values after reset</caption>
+      <tr><th>Setting</th><th>Value</th></tr>
+      <tr><td>Basic speed</td><td>10</td></tr>
+      <tr><td>Braking effect</td><td>10</td></tr>
+      <tr><td>Fuel tank capacity</td><td>7</td></tr>
+      <tr><td>Sound</td><td>on</td></tr>
+    </table>
+  </section>
+
+  <section id="trouble">
+    <div class="sec-head"><span class="sec-num">10</span><h2>Troubleshooting</h2></div>
+    <table>
+      <caption>Tab. 10.1  Common faults</caption>
+      <tr><th>Symptom</th><th>Cause / remedy</th></tr>
+      <tr><td>One controller drives several cars</td><td>Cars coded with more than one car on the rails. Recode per sec. 3, one car at a time.</td></tr>
+      <tr><td><span class="key">SPEED</span> / <span class="key">BRAKE</span> / <span class="key">FUEL</span> unresponsive</td><td>Unit may be in legacy Pro-X compatibility mode, which disables these shortcuts. Switch it back to Digital 132 mode.</td></tr>
+      <tr><td>Coding does nothing</td><td>Wrong connector or wireless channel. Point a wireless controller at its receiver exactly as when driving.</td></tr>
+      <tr><td>Settings in an unknown state</td><td>Run the factory reset, sec. 9.</td></tr>
+    </table>
+  </section>
+
+  <footer>
+    Compiled from Carrera DIGITAL 124/132 Control Unit (30352) documentation.
+    Wording and step order can vary slightly between firmware revisions; the printed manual supplied with your set is the final authority.
+  </footer>
+
+</div>
+</body>
+</html>
